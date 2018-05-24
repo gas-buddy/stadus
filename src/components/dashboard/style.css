@@ -1,0 +1,20 @@
+.white {
+  color: #E0EEEE;
+}
+.grey {
+  color: #8F9386;
+}
+.darkgrey {
+  color: #101111;
+}
+.pending {
+  color: #5a7fa9;
+}
+
+.positive, .success {
+  color: #00BE00;
+}
+
+.fail, .negative, .error {
+  color: #FD141A;
+}

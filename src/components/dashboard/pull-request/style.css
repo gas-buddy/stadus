@@ -1,0 +1,73 @@
+.pr {
+  /*text-shadow: -2px -2px 1px #121416;*/
+  border: 1px solid #121416;
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
+  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
+  border-radius: 3px;
+  background-color: #1C1E22;
+  padding: 7px;
+  margin: 2px 4px;
+  width: auto;
+  display: inline-block;
+  min-width: 240px;
+  position: relative;
+}
+.pr.success {
+  /*
+  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
+  -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
+  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
+  */
+  background-color: rgba(68, 74, 71, 0.776);
+}
+.pr.fail {
+  background-color: rgba(253, 20, 28, 0.262);
+}
+.pr.pending {
+  background-color: #5a7fa95e;
+}
+.pr a {
+  text-decoration: none;
+}
+
+.pr .comments {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  display: inline-block;
+}
+.pr .comments a {
+  color: #EEE;
+}
+.pr .comments a:hover {
+  text-decoration: none;
+}
+
+.title {
+  color: #EEE;
+  font-family: "Rajdhani";
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 24px;
+}
+
+.jiraLink {
+  float: right;
+  text-decoration: none;
+  font-size: 11px;
+  color: #777777;
+}
+
+.name {
+  text-decoration: none;
+  color: #E0EEEE;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.branchStatus {
+  font-family: "Rajdhani";
+  margin-right: 4px;
+}
