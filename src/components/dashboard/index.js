@@ -7,7 +7,7 @@ import TeamPanel from './team-panel';
 
 
 export default class Dashboard extends Component {
-  targetRepos = ['business-pages-serv', 'business-pages-api', 'business-pages-jobs-serv', 'business-pages-web', 'business-pages-admin-web'];
+  targetRepos = ['business-pages-serv', 'business-pages-api', 'business-pages-jobs-serv', 'business-pages-web', 'business-pages-admin-web', 'stadus'];
   state = {
     repos: [],
   }
