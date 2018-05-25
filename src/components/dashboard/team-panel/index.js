@@ -5,7 +5,6 @@ import PT from 'prop-types';
 import Style from './style.css';
 import { Repository } from '../repository';
 
-
 export default class TeamPanel extends Component {
   render() {
     return (
