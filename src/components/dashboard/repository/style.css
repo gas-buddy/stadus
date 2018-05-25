@@ -8,6 +8,7 @@
   cursor: pointer;
   vertical-align: middle;
   line-height: 30px;
+  color: #E2FFFF;
 }
 .name:hover {
   color: #E0EEEE;
