@@ -2,16 +2,29 @@
 import React, { Component } from 'react';
 import { Segment, Header } from 'semantic-ui-react';
 import PT from 'prop-types';
+import moment from 'moment';
 import Style from './style.css';
 
+type Props = {
+  data: Object // The pull request object, will flesh this in later
+}
 
-export class PullRequest extends Component {
+export class PullRequest extends Component<Props> {
+  pullRequest: Object;
+
+  constructor(props: any) {
+    super(props);
+    this.pullRequest = props.data;
+    console.log('Pull Request', this.pullRequest);
+  }
+
   render() {
-    const name = 'Implemented XYZ [BP-123] [BP-456]';
-    const branchName = 'am/implement-the-thing';
+    const name = this.pullRequest.title || '';
+    // This is gross, put this in state
+    const branchName = this.pullRequest.head.ref.replace('.json', '');
     const commentCount = Math.floor(Math.random() * 3);
 
-    const age = Math.floor(Math.random() * 14);
+    const age = moment().diff(moment(this.pullRequest.created_at), 'days');
     const decayRatio = Math.min(1.0, age / 10);
 
     const ageColor = decayRatio > 0.8 ?
@@ -26,7 +39,9 @@ export class PullRequest extends Component {
       status === 'fail' ? <span className={[Style.branchStatus, Style.fail].join(' ')}>✘</span>
       : status === 'success' ? <span className={[Style.branchStatus, Style.success].join(' ')}>✓</span>
       : <span className={[Style.branchStatus, Style.pending].join(' ')}>...</span>;
-    const jiraIssueNumbers = [ name.match(/\[([A-Z]+-[0-9]+)\]/)[1] ];
+    const jiraParse = name.match(/\[([A-Z]+-[0-9]+)\]/) || [];
+    jiraParse.shift();
+    const jiraIssueNumbers = jiraParse;
 
     const displayName = name.replace(/\[[A-Z]+-[0-9]+\]/g, '');
 
@@ -34,8 +49,10 @@ export class PullRequest extends Component {
       <Segment className={[Style.pr, Style[status]].join(' ')}>
         <Header className={Style.title}>
           <Segment>
-            <a className={Style.name} target="_blank" href={`https://github.com/gas-buddy/business-pages-serv/pull/431`}>{displayName}</a>
-            <a className={Style.jiraLink} target="_blank" href={`https://gasbuddy.atlassian.net/browse/${jiraIssueNumbers[0]}`}>{jiraIssueNumbers[0]}</a>
+            <a className={Style.name} target="_blank" href={this.pullRequest.html_url}>{displayName}</a>
+            {jiraIssueNumbers.map(issueNumber => (
+              <a className={Style.jiraLink} target="_blank" href={`https://gasbuddy.atlassian.net/browse/${issueNumber}`}>{issueNumber}</a>
+            ))}
           </Segment>
         </Header>
         <Segment>
@@ -73,5 +90,5 @@ export class PullRequest extends Component {
 
 
 PullRequest.propTypes = {
-  id: PT.number.isRequired,
+  data: PT.object.isRequired,
 };

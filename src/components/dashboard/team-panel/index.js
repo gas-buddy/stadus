@@ -9,7 +9,7 @@ export default class TeamPanel extends Component {
   render() {
     return (
       <Segment className={Style.teamPanel}>
-        <Header>{this.props.name}</Header>
+        <Header className={Style.name}>{this.props.name}</Header>
         <Segment> {
           this.props.repos.map(repo => (
             <Repository

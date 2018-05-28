@@ -1,22 +1,24 @@
 // @flow
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
+import _ from 'lodash';
+import * as github from '../../utils/github';
 import TeamPanel from './team-panel';
 
-const generateRepo = () => ({
-  id: Math.floor(Math.random() * 1000),
-});
-
-
-const mockRepos = Array.from(Array(3), generateRepo).sort(({ id: a }, { id: b }) => a - b);
 
 export default class Dashboard extends Component {
+  targetRepos = ['business-pages-serv', 'business-pages-api', 'business-pages-jobs-serv', 'business-pages-web', 'business-pages-admin-web', 'stadus'];
   state = {
     repos: [],
   }
 
+
   componentDidMount() {
-    setTimeout(repos => this.setState({ repos }), 1000, mockRepos);
+    github.getAllRepos().then((repos) => {
+      const subscribedRepos = _.intersectionBy(repos, this.targetRepos, r => r.name || r);
+      console.log(subscribedRepos);
+      this.setState({ repos: subscribedRepos });
+    });
   }
 
   render() {
