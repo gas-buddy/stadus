@@ -1,5 +1,25 @@
 ![](https://i.imgur.com/ecafSUv.png)
 
+# Setup
+1. Create a GitHub [Personal Access Token](https://github.com/settings/tokens)
+    1. Click `Generate new token`
+    2. Give it a description, like "Stadus Token"
+    3. Check off the top-level `repo` permission
+    4. Click `Generate token` and copy the token
+2. Create a file in this project called `.env.local` and put the following line:
+```
+REACT_APP_GITHUB_API_KEY={token goes here}
+```
+
+## Running the project
+
+1. `npm install`
+2. `npm start`
+3. http://localhost:3000
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
