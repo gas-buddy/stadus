@@ -15,6 +15,7 @@ export class PullRequest extends Component<Props> {
   constructor(props: any) {
     super(props);
     this.pullRequest = props.data;
+    console.log('Pull Request', this.pullRequest);
   }
 
   render() {
@@ -38,8 +39,9 @@ export class PullRequest extends Component<Props> {
       status === 'fail' ? <span className={[Style.branchStatus, Style.fail].join(' ')}>✘</span>
       : status === 'success' ? <span className={[Style.branchStatus, Style.success].join(' ')}>✓</span>
       : <span className={[Style.branchStatus, Style.pending].join(' ')}>...</span>;
-    const jiraParse = name.match(/\[([A-Z]+-[0-9]+)\]/);
-    const jiraIssueNumbers = jiraParse && jiraParse.length? [jiraParse[1]]: [];
+    const jiraParse = name.match(/\[([A-Z]+-[0-9]+)\]/) || [];
+    jiraParse.shift();
+    const jiraIssueNumbers = jiraParse;
 
     const displayName = name.replace(/\[[A-Z]+-[0-9]+\]/g, '');
 
@@ -47,8 +49,10 @@ export class PullRequest extends Component<Props> {
       <Segment className={[Style.pr, Style[status]].join(' ')}>
         <Header className={Style.title}>
           <Segment>
-            <a className={Style.name} target="_blank" href={`https://github.com/gas-buddy/business-pages-serv/pull/431`}>{displayName}</a>
-            <a className={Style.jiraLink} target="_blank" href={`https://gasbuddy.atlassian.net/browse/${jiraIssueNumbers[0]}`}>{jiraIssueNumbers[0]}</a>
+            <a className={Style.name} target="_blank" href={this.pullRequest.html_url}>{displayName}</a>
+            {jiraIssueNumbers.map(issueNumber => (
+              <a className={Style.jiraLink} target="_blank" href={`https://gasbuddy.atlassian.net/browse/${issueNumber}`}>{issueNumber}</a>
+            ))}
           </Segment>
         </Header>
         <Segment>

@@ -18,7 +18,9 @@ REACT_APP_GITHUB_API_KEY={token goes here}
 3. http://localhost:3000
 
 
-
+## Notes
+1. The status indicators aren't real (ie: success, fail, pending). They're randomly generated for now
+2. The comment count isn't real, it's randomly generated for now
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
