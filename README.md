@@ -9,6 +9,7 @@
 2. Create a file in this project called `.env.local` and put the following line:
 ```
 REACT_APP_GITHUB_API_KEY={token goes here}
+REACT_APP_GITHUB_REPOS=business-pages-serv,poi-serv,stadus
 ```
 
 ## Running the project
@@ -19,9 +20,6 @@ REACT_APP_GITHUB_API_KEY={token goes here}
 
 
 ## Notes
-1. The status indicators aren't real (ie: success, fail, pending). They're randomly generated for now
-2. The comment count isn't real, it's randomly generated for now
-
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

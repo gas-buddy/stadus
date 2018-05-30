@@ -7,43 +7,33 @@ import Style from './style.css';
 import { PullRequest } from '../pull-request';
 
 type Props = {
-  id: number,
+  owner: string,
   name: string,
 }
 
 export class Repository extends Component<Props> {
+  props: Props;
   state: { id: number, collapsed: boolean, loading: boolean, name: string, latestBranch: string, prs: Object[] };
-  name: string;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
+    this.props = props;
 
-    this.toggleCollapse = this.toggleCollapse.bind(this);
     this.load = this.load.bind(this);
-    this.name = props.name;
     this.state = {
-      id: props.id,
-      collapsed: false,
-      loading: true,
-      name: props.name,
       latestBranch: '',
-      prs: [],
+      prNumbers: [],
     };
   }
 
   load() {
-    this.setState({
-      loading: true,
-    });
     Promise.all([
-      github.getBranch(this.name, 'master'),
-      github.getPullRequestsForRepo(this.name),
+      github.getBranch(this.props.owner, this.props.name, 'master'),
+      github.getPullRequestsForRepo(this.props.owner, this.props.name),
     ]).then(([branch, pullRequests]) => {
-      console.log('Latest branch', branch);
       this.setState({
-        loading: false,
-        prs: pullRequests,
         latestBranch: branch.commit.commit.message.split('\n')[0],
+        prNumbers: pullRequests.map(pr => pr.number),
       });
     });
   }
@@ -53,26 +43,22 @@ export class Repository extends Component<Props> {
     setInterval(this.load, 60000);
   }
 
-  toggleCollapse() {
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed,
-    }));
-  }
-
   render() {
     let pullRequestElements = <Segment className={Style.empty}>(none)</Segment>;
-    if (this.state.prs.length) {
-      pullRequestElements = this.state.prs.map(pullRequest => (
+    if (this.state.prNumbers.length) {
+      pullRequestElements = this.state.prNumbers.map(prNumber => (
         <PullRequest
-          key={pullRequest.id}
-          data={pullRequest}
+          key={prNumber}
+          owner={this.props.owner}
+          repo={this.props.name}
+          number={prNumber}
         />
       ));
     }
     return (
-      <Segment id={this.state.id} className={Style.repository} loading={this.state.loading} inverted={this.state.collapsed}>
-        <Header className={Style.name} onClick={this.toggleCollapse}>
-          ▪▪▪ {this.state.name} ▪▪▪
+      <Segment className={Style.repository}>
+        <Header className={Style.name}>
+          ▪▪▪ {this.props.name} ▪▪▪
         </Header>
         <Segment className={Style.status}>{this.state.latestBranch}</Segment>
         <Segment>
@@ -84,6 +70,6 @@ export class Repository extends Component<Props> {
 }
 
 Repository.propTypes = {
-  id: PT.number.isRequired,
+  owner: PT.string.isRequired,
   name: PT.string.isRequired,
 };
