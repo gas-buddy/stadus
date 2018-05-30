@@ -11,11 +11,11 @@ export default class TeamPanel extends Component {
       <Segment className={Style.teamPanel}>
         <Header className={Style.name}>{this.props.name}</Header>
         <Segment> {
-          this.props.repos.map(repo => (
+          this.props.repoNames.map(repoName => (
             <Repository
-              key={repo.id}
-              id={repo.id}
-              name={repo.name}
+              key={repoName}
+              owner={this.props.owner}
+              name={repoName}
             />
           ))
         } </Segment>
@@ -27,5 +27,6 @@ export default class TeamPanel extends Component {
 TeamPanel.propTypes = {
   name: PT.string.isRequired,
   icon: PT.string.isRequired,
-  repos: PT.array.isRequired,
+  owner: PT.string.isRequired,
+  repoNames: PT.array.isRequired,
 };

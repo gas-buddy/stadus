@@ -13,7 +13,7 @@
   min-width: 240px;
   position: relative;
 }
-.pr.success {
+.pr.blocked {
   
   /* -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
   -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
@@ -21,10 +21,7 @@
  
   background-color: rgba(0,190,0,0.2);
 }
-.pr.fail {
-  background-color: rgba(253, 20, 28, 0.262);
-}
-.pr.pending {
+.pr.behind {
   background-color: #5a7fa95e;
 }
 .pr a {
@@ -55,8 +52,11 @@
 .jiraLink {
   float: right;
   text-decoration: none;
+  font-weight: bold;
   font-size: 11px;
   color: #777777;
+  margin-left: 5px;
+  font-family: "Rajdhani";
 }
 
 .name {

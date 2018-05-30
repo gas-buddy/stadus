@@ -9,6 +9,7 @@
 2. Create a file in this project called `.env.local` and put the following line:
 ```
 REACT_APP_GITHUB_API_KEY={token goes here}
+REACT_APP_GITHUB_REPOS=business-pages-serv,poi-serv,stadus
 ```
 
 ## Running the project
