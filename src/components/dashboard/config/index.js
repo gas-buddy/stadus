@@ -17,10 +17,9 @@ export default class Config extends Component<Props> {
 
     this.configClicked = this.configClicked.bind(this);
 
-    const config = store.get('config') || {};
-    window.app = { config: {} };
-    window.app.config = config;
-    this.state = { collapsed: false, config };
+    const config = store.get('config') || { owner: '', repos: '', githubApiKey: '' };
+    this.state = { collapsed: true, config };
+    this.props.onChange(this.state.config);
   }
 
   configClicked() {
@@ -37,7 +36,6 @@ export default class Config extends Component<Props> {
     this.setState((prevState) => {
       prevState.config[input.name] = input.value;
       store.set('config', prevState.config);
-      window.app.config = prevState.config;
       return prevState;
     });
   }
@@ -46,11 +44,11 @@ export default class Config extends Component<Props> {
     return (
       <Segment>
         <Segment onClick={this.configClicked}>Config</Segment>
-        {this.state.collapsed ? (
+        {!this.state.collapsed ? (
           <Segment>
-            <Input onChange={this.handleChange.bind(this)} name="githubApiKey" value={this.state.config.githubApiKey}/>
-            <Input onChange={this.handleChange.bind(this)} name="owner" value={this.state.config.owner}/>
-            <Input onChange={this.handleChange.bind(this)} name="repos" value={this.state.config.repos}/>
+            <Input onChange={this.handleChange.bind(this)} name="githubApiKey" placeholder="GitHub Api Key" value={this.state.config.githubApiKey}/>
+            <Input onChange={this.handleChange.bind(this)} name="owner" placeholder="GitHub Organization" value={this.state.config.owner}/>
+            <Input onChange={this.handleChange.bind(this)} name="repos" placeholder="Comma-separated repo name"value={this.state.config.repos}/>
           </Segment>
         ) : null}
       </Segment>

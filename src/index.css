@@ -10,10 +10,10 @@
 
 body {
   background-color: #272B30;
-  color: #999999;
+  color: #111;
   padding-top: 20px;
   padding-bottom: 20px;
-  font-family: "Anaheim";
+  font-family: "Ruda";
   font-variant: small-caps;
   letter-spacing: 1.1px;
   font-size: 14px;
@@ -21,3 +21,9 @@ body {
   text-align: left;
 }
 
+a {
+  color: #111;
+}
+a:hover {
+  text-decoration: underline;
+}

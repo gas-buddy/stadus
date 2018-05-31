@@ -5,16 +5,31 @@ import PT from 'prop-types';
 import Style from './style.css';
 import { Repository } from '../repository';
 
-export default class TeamPanel extends Component {
+type Props = {
+  name: string,
+  icon: string,
+  owner: string,
+  repoNames: string[],
+};
+
+export default class TeamPanel extends Component<Props> {
+  state: Props;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = props;
+  }
+
   render() {
+    console.log('Team Panel', this.state);
     return (
       <Segment className={Style.teamPanel}>
-        <Header className={Style.name}>{this.props.name}</Header>
+        <Header className={Style.name}>{this.state.name}</Header>
         <Segment> {
-          this.props.repoNames.map(repoName => (
+          this.state.repoNames.map(repoName => (
             <Repository
               key={repoName}
-              owner={this.props.owner}
+              owner={this.state.owner}
               name={repoName}
             />
           ))

@@ -1,10 +1,10 @@
 .pr {
   /*text-shadow: -2px -2px 1px #121416;*/
   border: 1px solid #121416;
-  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
+  /* -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
   -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
-  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
-  border-radius: 3px;
+  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1); */
+  border-radius: 2px;
   background-color: #1C1E22;
   padding: 7px;
   margin: 2px 4px;
@@ -34,16 +34,11 @@
   right: 5px;
   display: inline-block;
 }
-.pr .comments a {
-  color: #EEE;
-}
 .pr .comments a:hover {
   text-decoration: none;
 }
 
 .title {
-  color: #EEE;
-  font-family: "Rajdhani";
   font-size: 16px;
   font-weight: bold;
   line-height: 24px;
@@ -54,23 +49,13 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 11px;
-  color: #777777;
   margin-left: 5px;
-  font-family: "Rajdhani";
 }
 
 .name {
   text-decoration: none;
-  color: #E0EEEE;
-}
-a {
-  color: #D2DDDD;
-}
-a:hover {
-  text-decoration: underline;
 }
 
 .branchStatus {
-  font-family: "Rajdhani";
   margin-right: 4px;
 }

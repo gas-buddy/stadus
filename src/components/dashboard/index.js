@@ -1,36 +1,53 @@
 // @flow
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
-import PT from 'prop-types';
+import backgroundImage from './bg.jpg';
 import Config from './config';
 import TeamPanel from './team-panel';
+import Style from './style.css';
 
 type Props = { owner: string, repoNames: string[] };
 
 export default class Dashboard extends Component<Props> {
-  props: Props;
+  state: ?Props;
 
-  constructor(props: Props) {
+  constructor(props) {
     super(props);
-    this.props = props;
+    this.configChanged = this.configChanged.bind(this);
+
+    this.state = undefined;
+  }
+
+  configChanged(newConfig: { owner: string, repos: string }) {
+    this.setState({
+      owner: newConfig.owner,
+      repoNames: _(newConfig.repos.split(',')).filter(name => name).map(name => name.trim()).value(),
+    });
+  }
+
+  componentWillMount() {
+    document.body.style.backgroundImage = `url(${backgroundImage})`;
+    document.body.style.backgroundPosition = 'center 25%';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundSize = '100%';
+    document.body.style.backgroundColor = '#FFFFFF';
   }
 
   render() {
+    console.log('Dashboard', this.state);
     return (
-      <Container>
-        <TeamPanel
-          name="Business Pages"
-          owner={this.props.owner}
-          repoNames={this.props.repoNames}
-          icon="https://dl1.cbsistatic.com/i/2017/09/13/d87068fc-2dc3-4234-8684-6bb330a45f31/9ea1629d139e0b5666890eeb995c87d6/imgingest-5267403705378669572.png"
-        />
+      <Container className={Style.dashboard}>
+        {this.state ? 
+          <TeamPanel
+            name="Business Pages"
+            owner={this.state.owner}
+            repoNames={this.state.repoNames}
+            icon="https://dl1.cbsistatic.com/i/2017/09/13/d87068fc-2dc3-4234-8684-6bb330a45f31/9ea1629d139e0b5666890eeb995c87d6/imgingest-5267403705378669572.png"
+          />
+        : null}
         <Config onChange={this.configChanged} />
       </Container>
     );
   }
 }
-
-Dashboard.propTypes = {
-  owner: PT.string.isRequired,
-  repoNames: PT.array.isRequired,
-};

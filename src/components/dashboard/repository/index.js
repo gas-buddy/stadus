@@ -13,7 +13,7 @@ type Props = {
 
 export class Repository extends Component<Props> {
   props: Props;
-  state: { id: number, collapsed: boolean, loading: boolean, name: string, latestBranch: string, prs: Object[] };
+  state: { owner: string, id: number, collapsed: boolean, loading: boolean, name: string, latestBranch: string, prs: Object[] };
 
   constructor(props: Props) {
     super(props);
@@ -21,6 +21,8 @@ export class Repository extends Component<Props> {
 
     this.load = this.load.bind(this);
     this.state = {
+      owner: props.owner,
+      name: props.name,
       latestBranch: '',
       prNumbers: [],
     };
@@ -28,8 +30,8 @@ export class Repository extends Component<Props> {
 
   load() {
     Promise.all([
-      github.getBranch(this.props.owner, this.props.name, 'master'),
-      github.getPullRequestsForRepo(this.props.owner, this.props.name),
+      github.getBranch(this.state.owner, this.state.name, 'master'),
+      github.getPullRequestsForRepo(this.state.owner, this.state.name),
     ]).then(([branch, pullRequests]) => {
       this.setState({
         latestBranch: branch.commit.commit.message.split('\n')[0],
@@ -44,6 +46,7 @@ export class Repository extends Component<Props> {
   }
 
   render() {
+    console.log('Repository', this.state);
     let pullRequestElements = <Segment className={Style.empty}>(none)</Segment>;
     if (this.state.prNumbers.length) {
       pullRequestElements = this.state.prNumbers.map(prNumber => (

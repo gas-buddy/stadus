@@ -13,20 +13,24 @@ type Props = {
 }
 
 export class PullRequest extends Component<Props> {
-  state: { pr: any, commitStatuses: any[] }
+  state: { owner: string, repo: string, number: number, pr: any, commitStatuses: any[] }
 
   constructor(props: Props) {
     super(props);
     this.props = props;
-    this.state = { };
+    this.state = {
+      owner: props.owner,
+      repo: props.repo,
+      number: props.number,
+    };
   }
 
   componentDidMount() {
-    github.getPullRequest(this.props.owner, this.props.repo, this.props.number)
+    github.getPullRequest(this.state.owner, this.state.repo, this.state.number)
       .then((pr) => {
         Promise.all([
-          github.getCommitStatuses(this.props.owner, this.props.repo, pr.head.sha),
-          github.getPullRequestComments(this.props.owner, this.props.repo, this.props.number, pr.created_at),
+          github.getCommitStatuses(this.state.owner, this.state.repo, pr.head.sha),
+          github.getPullRequestComments(this.state.owner, this.state.repo, this.state.number, pr.created_at),
         ]).then(([statuses, comments]) => {
           this.setState({ pr, statuses, comments });
         });
@@ -34,6 +38,7 @@ export class PullRequest extends Component<Props> {
   }
 
   render() {
+    console.log('PullRequest', this.state);
     if (!this.state.pr) {
       return null;
     }
@@ -41,17 +46,16 @@ export class PullRequest extends Component<Props> {
     const name = this.state.pr.title || '';
     // This is gross, put this in state
     const branchName = this.state.pr.head.ref;
-    console.log({ name: this.state.pr.title, comments: this.state.comments });
     const commentCount = this.state.comments.length;
 
     const age = moment().diff(moment(this.state.pr.created_at), 'days');
     const decayRatio = Math.min(1.0, age / 10);
 
     const ageColor = decayRatio > 0.8 ?
-        '#E0EEEE'
+        '#FF1919'
       : decayRatio > 0.4 ?
-        '#A0AAAA'
-      : '#606666';
+        '#FFCB00'
+      : '#0B77C3';
 
     let mergeState;
     switch (this.state.pr.mergeable_state) {
