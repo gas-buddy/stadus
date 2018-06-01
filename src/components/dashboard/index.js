@@ -1,7 +1,7 @@
 // @flow
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Rail } from 'semantic-ui-react';
 import backgroundImage from './bg.jpg';
 import Config from './config';
 import TeamPanel from './team-panel';
@@ -23,7 +23,7 @@ export default class Dashboard extends Component<Props> {
     this.setState({
       owner: newConfig.owner,
       repoNames: _(newConfig.repos.split(',')).filter(name => name).map(name => name.trim()).value(),
-    });
+    }, this.forceUpdate);
   }
 
   componentWillMount() {
@@ -35,9 +35,9 @@ export default class Dashboard extends Component<Props> {
   }
 
   render() {
-    console.log('Dashboard', this.state);
     return (
       <Container className={Style.dashboard}>
+        <Config onChange={this.configChanged}/>
         {this.state ? 
           <TeamPanel
             name="Business Pages"
@@ -46,7 +46,6 @@ export default class Dashboard extends Component<Props> {
             icon="https://dl1.cbsistatic.com/i/2017/09/13/d87068fc-2dc3-4234-8684-6bb330a45f31/9ea1629d139e0b5666890eeb995c87d6/imgingest-5267403705378669572.png"
           />
         : null}
-        <Config onChange={this.configChanged} />
       </Container>
     );
   }

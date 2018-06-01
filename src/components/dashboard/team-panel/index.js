@@ -20,8 +20,11 @@ export default class TeamPanel extends Component<Props> {
     this.state = props;
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
+  }
+
   render() {
-    console.log('Team Panel', this.state);
     return (
       <Segment className={Style.teamPanel}>
         <Header className={Style.name}>{this.state.name}</Header>

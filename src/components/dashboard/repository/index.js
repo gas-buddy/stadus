@@ -28,6 +28,14 @@ export class Repository extends Component<Props> {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState) => {
+      prevState.owner = nextProps.owner;
+      prevState.name = nextProps.name;
+      return prevState;
+    }, this.load);
+  }
+
   load() {
     Promise.all([
       github.getBranch(this.state.owner, this.state.name, 'master'),
@@ -36,6 +44,12 @@ export class Repository extends Component<Props> {
       this.setState({
         latestBranch: branch.commit.commit.message.split('\n')[0],
         prNumbers: pullRequests.map(pr => pr.number),
+      });
+    }).catch(() => {
+      this.setState((prevState) => {
+        prevState.latestBranch = '';
+        prevState.prNumbers = [];
+        return prevState;
       });
     });
   }
@@ -46,7 +60,6 @@ export class Repository extends Component<Props> {
   }
 
   render() {
-    console.log('Repository', this.state);
     let pullRequestElements = <Segment className={Style.empty}>(none)</Segment>;
     if (this.state.prNumbers.length) {
       pullRequestElements = this.state.prNumbers.map(prNumber => (

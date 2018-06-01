@@ -25,6 +25,10 @@ export class PullRequest extends Component<Props> {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
+  }
+
   componentDidMount() {
     github.getPullRequest(this.state.owner, this.state.repo, this.state.number)
       .then((pr) => {
@@ -38,7 +42,6 @@ export class PullRequest extends Component<Props> {
   }
 
   render() {
-    console.log('PullRequest', this.state);
     if (!this.state.pr) {
       return null;
     }
