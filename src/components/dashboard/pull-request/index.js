@@ -89,16 +89,16 @@ export class PullRequest extends Component<Props> {
         </Header>
         <Segment>
           {Status}
-          <a className={Style.grey} target="_blank" href={`${this.state.pr.base.repo.html_url}/tree/${branchName}`}>{branchName}</a>
+          <a className={Style.branchName} target="_blank" href={`${this.state.pr.base.repo.html_url}/tree/${branchName}`}>{branchName}</a>
         </Segment>
         <Segment className={Style.darkgrey}>
           <span style={{
             display: 'inline-block',
             backgroundColor: ageColor,
-            height: '2px',
+            height: '8px',
             verticalAlign: 'middle',
             minWidth: '15px',
-            width: `${Math.max(2, decayRatio * 70)}%`,
+            width: `${Math.max(2, decayRatio * 60)}%`,
             marginRight: '10px',
           }}></span>
           <span  style={{

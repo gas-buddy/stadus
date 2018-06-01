@@ -72,7 +72,7 @@ export class Repository extends Component<Props> {
       ));
     }
     return (
-      <Segment className={Style.repository}>
+      <Segment className={[Style.repository, !this.state.prNumbers.length ? Style.empty : null].join(' ')}>
         <Header className={Style.name}>
           ▪▪▪ {this.props.name} ▪▪▪
         </Header>

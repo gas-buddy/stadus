@@ -40,7 +40,6 @@ export default class Dashboard extends Component<Props> {
         <Config onChange={this.configChanged}/>
         {this.state ? 
           <TeamPanel
-            name="Business Pages"
             owner={this.state.owner}
             repoNames={this.state.repoNames}
             icon="https://dl1.cbsistatic.com/i/2017/09/13/d87068fc-2dc3-4234-8684-6bb330a45f31/9ea1629d139e0b5666890eeb995c87d6/imgingest-5267403705378669572.png"

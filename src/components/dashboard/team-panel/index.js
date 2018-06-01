@@ -6,7 +6,6 @@ import Style from './style.css';
 import { Repository } from '../repository';
 
 type Props = {
-  name: string,
   icon: string,
   owner: string,
   repoNames: string[],
@@ -27,7 +26,6 @@ export default class TeamPanel extends Component<Props> {
   render() {
     return (
       <Segment className={Style.teamPanel}>
-        <Header className={Style.name}>{this.state.name}</Header>
         <Segment> {
           this.state.repoNames.map(repoName => (
             <Repository
@@ -43,7 +41,6 @@ export default class TeamPanel extends Component<Props> {
 }
 
 TeamPanel.propTypes = {
-  name: PT.string.isRequired,
   icon: PT.string.isRequired,
   owner: PT.string.isRequired,
   repoNames: PT.array.isRequired,
