@@ -5,19 +5,26 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 @import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow');
 @import url('https://fonts.googleapis.com/css?family=Special+Elite');
-@import url('https://fonts.googleapis.com/css?family=Anaheim');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
 
 
 body {
   background-color: #272B30;
-  color: #999999;
+  color: #111;
   padding-top: 20px;
   padding-bottom: 20px;
-  font-family: "Anaheim";
+  font-family: "Work Sans";
   font-variant: small-caps;
   letter-spacing: 1.1px;
-  font-size: 14px;
-  line-height: 17px;
+  font-size: 20px;
+  line-height: 24px;
   text-align: left;
+  font-weight: bold;
 }
 
+a {
+  color: #111;
+}
+a:hover {
+  text-decoration: underline;
+}

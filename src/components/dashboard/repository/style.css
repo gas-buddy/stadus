@@ -8,14 +8,21 @@
   cursor: pointer;
   vertical-align: middle;
   line-height: 30px;
-  color: #E2FFFF;
-  font-size: 20px;
-  font-family: 'Ruda';
-}
-.name:hover {
-  color: #E0EEEE;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
 }
 
 .status {
   display: inline-block;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.empty,
+.empty .name {
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: lowercase;
 }

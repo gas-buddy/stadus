@@ -13,7 +13,7 @@ type Props = {
 
 export class Repository extends Component<Props> {
   props: Props;
-  state: { id: number, collapsed: boolean, loading: boolean, name: string, latestBranch: string, prs: Object[] };
+  state: { owner: string, id: number, collapsed: boolean, loading: boolean, name: string, latestBranch: string, prs: Object[] };
 
   constructor(props: Props) {
     super(props);
@@ -21,19 +21,35 @@ export class Repository extends Component<Props> {
 
     this.load = this.load.bind(this);
     this.state = {
+      owner: props.owner,
+      name: props.name,
       latestBranch: '',
       prNumbers: [],
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState((prevState) => {
+      prevState.owner = nextProps.owner;
+      prevState.name = nextProps.name;
+      return prevState;
+    }, this.load);
+  }
+
   load() {
     Promise.all([
-      github.getBranch(this.props.owner, this.props.name, 'master'),
-      github.getPullRequestsForRepo(this.props.owner, this.props.name),
+      github.getBranch(this.state.owner, this.state.name, 'master'),
+      github.getPullRequestsForRepo(this.state.owner, this.state.name),
     ]).then(([branch, pullRequests]) => {
       this.setState({
         latestBranch: branch.commit.commit.message.split('\n')[0],
         prNumbers: pullRequests.map(pr => pr.number),
+      });
+    }).catch(() => {
+      this.setState((prevState) => {
+        prevState.latestBranch = '';
+        prevState.prNumbers = [];
+        return prevState;
       });
     });
   }
@@ -56,7 +72,7 @@ export class Repository extends Component<Props> {
       ));
     }
     return (
-      <Segment className={Style.repository}>
+      <Segment className={[Style.repository, !this.state.prNumbers.length ? Style.empty : null].join(' ')}>
         <Header className={Style.name}>
           ▪▪▪ {this.props.name} ▪▪▪
         </Header>

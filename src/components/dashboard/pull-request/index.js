@@ -13,20 +13,28 @@ type Props = {
 }
 
 export class PullRequest extends Component<Props> {
-  state: { pr: any, commitStatuses: any[] }
+  state: { owner: string, repo: string, number: number, pr: any, commitStatuses: any[] }
 
   constructor(props: Props) {
     super(props);
     this.props = props;
-    this.state = { };
+    this.state = {
+      owner: props.owner,
+      repo: props.repo,
+      number: props.number,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps);
   }
 
   componentDidMount() {
-    github.getPullRequest(this.props.owner, this.props.repo, this.props.number)
+    github.getPullRequest(this.state.owner, this.state.repo, this.state.number)
       .then((pr) => {
         Promise.all([
-          github.getCommitStatuses(this.props.owner, this.props.repo, pr.head.sha),
-          github.getPullRequestComments(this.props.owner, this.props.repo, this.props.number, pr.created_at),
+          github.getCommitStatuses(this.state.owner, this.state.repo, pr.head.sha),
+          github.getPullRequestComments(this.state.owner, this.state.repo, this.state.number, pr.created_at),
         ]).then(([statuses, comments]) => {
           this.setState({ pr, statuses, comments });
         });
@@ -41,17 +49,16 @@ export class PullRequest extends Component<Props> {
     const name = this.state.pr.title || '';
     // This is gross, put this in state
     const branchName = this.state.pr.head.ref;
-    console.log({ name: this.state.pr.title, comments: this.state.comments });
     const commentCount = this.state.comments.length;
 
     const age = moment().diff(moment(this.state.pr.created_at), 'days');
     const decayRatio = Math.min(1.0, age / 10);
 
     const ageColor = decayRatio > 0.8 ?
-        '#E0EEEE'
+        '#FF1919'
       : decayRatio > 0.4 ?
-        '#A0AAAA'
-      : '#606666';
+        '#FFCB00'
+      : '#0B77C3';
 
     let mergeState;
     switch (this.state.pr.mergeable_state) {
@@ -82,16 +89,16 @@ export class PullRequest extends Component<Props> {
         </Header>
         <Segment>
           {Status}
-          <a className={Style.grey} target="_blank" href={`${this.state.pr.base.repo.html_url}/tree/${branchName}`}>{branchName}</a>
+          <a className={Style.branchName} target="_blank" href={`${this.state.pr.base.repo.html_url}/tree/${branchName}`}>{branchName}</a>
         </Segment>
         <Segment className={Style.darkgrey}>
           <span style={{
             display: 'inline-block',
             backgroundColor: ageColor,
-            height: '2px',
+            height: '8px',
             verticalAlign: 'middle',
             minWidth: '15px',
-            width: `${Math.max(2, decayRatio * 70)}%`,
+            width: `${Math.max(2, decayRatio * 60)}%`,
             marginRight: '10px',
           }}></span>
           <span  style={{

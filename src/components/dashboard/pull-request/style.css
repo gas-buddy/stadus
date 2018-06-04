@@ -1,17 +1,14 @@
 .pr {
-  /*text-shadow: -2px -2px 1px #121416;*/
   border: 1px solid #121416;
-  -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
-  -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
-  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1);
-  border-radius: 3px;
-  background-color: #1C1E22;
+  border-radius: 2px;
+  background-color: #FFFFFF;
   padding: 7px;
   margin: 2px 4px;
   width: auto;
   display: inline-block;
   min-width: 240px;
   position: relative;
+  border-left: 20px solid #FFFFFF;
 }
 .pr.blocked {
   
@@ -19,10 +16,10 @@
   -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
   box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2); */
  
-  background-color: rgba(0,190,0,0.2);
+  border-color: rgba(0,190,0,0.8);
 }
 .pr.behind {
-  background-color: #5a7fa95e;
+  border-color: #5a7fa9cc;
 }
 .pr a {
   text-decoration: none;
@@ -34,17 +31,12 @@
   right: 5px;
   display: inline-block;
 }
-.pr .comments a {
-  color: #EEE;
-}
 .pr .comments a:hover {
   text-decoration: none;
 }
 
 .title {
-  color: #EEE;
-  font-family: "Rajdhani";
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   line-height: 24px;
 }
@@ -54,23 +46,17 @@
   text-decoration: none;
   font-weight: bold;
   font-size: 11px;
-  color: #777777;
   margin-left: 5px;
-  font-family: "Rajdhani";
+}
+
+.branchName {
+  font-size: 14px;
 }
 
 .name {
   text-decoration: none;
-  color: #E0EEEE;
-}
-a {
-  color: #D2DDDD;
-}
-a:hover {
-  text-decoration: underline;
 }
 
 .branchStatus {
-  font-family: "Rajdhani";
   margin-right: 4px;
 }

@@ -1,0 +1,81 @@
+.configPanel {
+  float: right;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.configPanel.opened {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #EEE;
+}
+.configHeader {
+  text-align: right;
+}
+.configHeader span {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.inputEffect {
+  width: 360px;
+  position: relative;
+  z-index: 10;
+}
+
+/* necessary to give position: relative to parent. */
+
+.input {
+  font: 15px/24px "Lato", Arial, sans-serif;
+  color: #FFF;
+  width: 100%;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  border: 0;
+  padding: 4px 0;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  transition: 0.3s;
+}
+
+.input~.focusBorder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #1eb35a;
+  transition: 0.4s;
+}
+
+.input:focus~.focusBorder,
+.input.populated~.focusBorder {
+  width: 100%;
+}
+
+.input~label {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 9px;
+  color: #CCC;
+  z-index: 9;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+}
+
+.input:focus,
+.input.populated {
+  margin-top: 20px;
+}
+.input:focus~label,
+.input.populated~label {
+  top: 7px;
+  font-size: 12px;
+}
+.input:focus~label {
+  color: #FFF;
+}

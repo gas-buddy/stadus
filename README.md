@@ -6,11 +6,7 @@
     2. Give it a description, like "Stadus Token"
     3. Check off the top-level `repo` permission
     4. Click `Generate token` and copy the token
-2. Create a file in this project called `.env.local` and put the following line:
-```
-REACT_APP_GITHUB_API_KEY={token goes here}
-REACT_APP_GITHUB_REPOS=business-pages-serv,poi-serv,stadus
-```
+2. Run the project and open the config section, and enter the appropriate values
 
 ## Running the project
 
