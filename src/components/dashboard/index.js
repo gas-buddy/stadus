@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Container, Rail } from 'semantic-ui-react';
-import backgroundImage from './bg.jpg';
+import backgroundImage from './bg.png';
 import Config from './config';
 import TeamPanel from './team-panel';
 import Style from './style.css';
@@ -28,9 +28,8 @@ export default class Dashboard extends Component<Props> {
 
   componentWillMount() {
     document.body.style.backgroundImage = `url(${backgroundImage})`;
-    document.body.style.backgroundPosition = 'center 25%';
-    document.body.style.backgroundRepeat = 'no-repeat';
-    document.body.style.backgroundSize = '100%';
+    document.body.style.backgroundRepeat = 'repeat';
+    document.body.style.backgroundSize = '10%';
     document.body.style.backgroundColor = '#FFFFFF';
   }
 
