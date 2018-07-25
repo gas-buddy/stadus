@@ -6,6 +6,7 @@
     2. Give it a description, like "Stadus Token"
     3. Check off the top-level `repo` permission
     4. Click `Generate token` and copy the token
+![](https://i.imgur.com/R2S5MPl.png)
 
 ## Running the project
 
