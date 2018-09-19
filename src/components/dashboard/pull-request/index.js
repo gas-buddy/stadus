@@ -46,7 +46,6 @@ export class PullRequest extends Component<Props> {
     if (!this.state.pr) {
       return null;
     }
-    console.log(this.state.pr);
     const name = this.state.pr.title || '';
     // This is gross, put this in state
     const branchName = this.state.pr.head.ref;
@@ -114,7 +113,7 @@ export class PullRequest extends Component<Props> {
           commentCount ?
             (<Segment className={Style.comments}>
               <a target="_blank" href={this.state.pr.html_url}>
-                💬{commentCount}
+                <span role="img" aria-label="Comments">💬</span>{commentCount}
               </a>
             </Segment>) : null
         }

@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Segment, Header } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import PT from 'prop-types';
 import Style from './style.css';
 import { Repository } from '../repository';

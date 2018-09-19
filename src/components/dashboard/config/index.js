@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import { Segment, Input } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import FontAwesome from 'react-fontawesome';
 import configStore from '../../../utils/config-store';
 import store from 'store';
