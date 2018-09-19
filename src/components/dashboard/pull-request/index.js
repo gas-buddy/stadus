@@ -62,15 +62,24 @@ export class PullRequest extends Component<Props> {
 
     let mergeState;
     switch (this.state.pr.mergeable_state) {
+      case 'clean': mergeState = 'clean'; break;
       case 'behind': mergeState = 'behind'; break;
+      case 'dirty': mergeState = 'dirty'; break;
       default: mergeState = 'blocked';
     }
 
-    const status = 'success'; // randomStatus > 0.8 ? 'fail' : randomStatus > 0.3 ? 'success' : 'pending';
+    let latestBuildStatus;
+    switch(this.state.statuses[0].state) {
+      case 'success': latestBuildStatus = 'success'; break;
+      case 'failure': latestBuildStatus = 'error'; break;
+      default: latestBuildStatus = 'pending';
+    }
+
     const Status =
-      status === 'fail' ? <span className={[Style.branchStatus, Style.fail].join(' ')}>✘</span>
-      : status === 'success' ? <span className={[Style.branchStatus, Style.success].join(' ')}>✓</span>
+      latestBuildStatus === 'error' ? <span className={[Style.branchStatus, Style.fail].join(' ')}>✘</span>
+      : latestBuildStatus === 'success' ? <span className={[Style.branchStatus, Style.success].join(' ')}>✓</span>
       : <span className={[Style.branchStatus, Style.pending].join(' ')}>...</span>;
+
     const jiraParse = name.match(/\[([A-Z]+-[0-9]+)\]/) || [];
     jiraParse.shift();
     const jiraIssueNumbers = jiraParse;

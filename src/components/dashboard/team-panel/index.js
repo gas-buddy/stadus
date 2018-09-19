@@ -16,11 +16,19 @@ export default class TeamPanel extends Component<Props> {
 
   constructor(props: Props) {
     super(props);
-    this.state = props;
+    this.state = {
+      icon: props.icon,
+      owner: props.owner,
+      repoNames: props.repoNames,
+    };
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState(nextProps);
+    this.setState({
+      icon: nextProps.icon,
+      owner: nextProps.owner,
+      repoNames: nextProps.repoNames,
+    });
   }
 
   render() {
