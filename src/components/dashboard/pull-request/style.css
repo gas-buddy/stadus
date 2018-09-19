@@ -1,4 +1,5 @@
 .pr {
+  color: #FFFFFF;
   border: 1px solid #121416;
   border-radius: 2px;
   background-color: #FFFFFF;
@@ -34,11 +35,16 @@
   line-height: 14px;
   content: "BEHIND";
 }
-.pr.dirty {
+.pr.error {
   border-color: #FF5613;
 }
+.pr.error::after {
+  content: "FAILED";
+}
+.pr.dirty {
+  border-color: #383845;
+}
 .pr.dirty::after {
-  color: #FFFFFF;
   font-size: 11px;
   line-height: 11px;
   content: "CONFLICT";
