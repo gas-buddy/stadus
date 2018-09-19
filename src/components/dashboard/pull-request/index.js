@@ -4,7 +4,7 @@ import { Segment, Header } from 'semantic-ui-react';
 import PT from 'prop-types';
 import moment from 'moment';
 import * as github from '../../../utils/github';
-import { Reviewers } from './reviewers';
+import { Avatars } from './avatars';
 import Style from './style.css';
 
 type Props = {
@@ -37,7 +37,7 @@ export class PullRequest extends Component<Props> {
           github.getCommitStatuses(this.state.owner, this.state.repo, pr.head.sha),
           github.getPullRequestComments(this.state.owner, this.state.repo, this.state.number, pr.created_at),
         ]).then(([statuses, comments]) => {
-          this.setState({ pr, statuses, comments });
+          this.setState({ ...this.state, pr, statuses, comments });
         });
       });
   }
@@ -46,6 +46,7 @@ export class PullRequest extends Component<Props> {
     if (!this.state.pr) {
       return null;
     }
+    console.log(this.state.pr);
     const name = this.state.pr.title || '';
     // This is gross, put this in state
     const branchName = this.state.pr.head.ref;
@@ -81,7 +82,7 @@ export class PullRequest extends Component<Props> {
       <Segment className={[Style.pr, Style[mergeState]].join(' ')}>
          <Header className={Style.title}>
            <Segment style={{ height: '32px', lineHeight: '32px' }}>
-            <Reviewers reviewers={this.state.pr.requested_reviewers}/>
+            <Avatars reviewers={this.state.pr.requested_reviewers} assignees={this.state.pr.assignees}/>
              <a className={Style.name} target="_blank" href={this.state.pr.html_url}>#{this.props.number} - {displayName}</a>
              {jiraIssueNumbers.map(issueNumber => (
               <a key={issueNumber} className={Style.jiraLink} target="_blank" href={`https://gasbuddy.atlassian.net/browse/${issueNumber}`}>{issueNumber}</a>
