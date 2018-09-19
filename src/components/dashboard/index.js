@@ -1,7 +1,7 @@
 // @flow
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Container, Rail } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import backgroundImage from './bg.png';
 import Config from './config';
 import TeamPanel from './team-panel';
