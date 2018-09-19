@@ -6,6 +6,7 @@ import moment from 'moment';
 import * as github from '../../../utils/github';
 import { Avatars } from './avatars';
 import Style from './style.css';
+import DashStyle from '../style.css';
 
 type Props = {
   owner: string,
@@ -105,7 +106,7 @@ export class PullRequest extends Component<Props> {
           {Status}
           <a className={Style.branchName} target="_blank" href={`${this.state.pr.base.repo.html_url}/tree/${branchName}`}>{branchName}</a>
         </Segment>
-        <Segment className={Style.darkgrey}>
+        <Segment className={DashStyle.darkgrey}>
           <span style={{
             display: 'inline-block',
             backgroundColor: ageColor,
