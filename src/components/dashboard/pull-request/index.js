@@ -75,6 +75,10 @@ export class PullRequest extends Component<Props> {
       default: latestBuildStatus = 'pending';
     }
 
+    if (latestBuildStatus === 'error') {
+      mergeState = 'error';
+    }
+
     const Status =
       latestBuildStatus === 'error' ? <span className={[Style.branchStatus, Style.fail].join(' ')}>✘</span>
       : latestBuildStatus === 'success' ? <span className={[Style.branchStatus, Style.success].join(' ')}>✓</span>
