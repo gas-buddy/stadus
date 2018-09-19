@@ -10,16 +10,47 @@
   position: relative;
   border-left: 20px solid #FFFFFF;
 }
-.pr.blocked {
-  
-  /* -webkit-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
-  -moz-box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2);
-  box-shadow: inset 0px 0px 5px 0px rgba(18,20,22,1), inset 0px 0px 58px -1px rgba(0,190,0,0.2); */
- 
-  border-color: rgba(0,190,0,0.8);
+.pr::after {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: bold;
+  overflow-wrap: break-word;
+  width: 10px;
+  position: absolute;
+  top: 3px;
+  left: -15px;
+}
+.pr.clean {
+  border-color: #00bd00;
+}
+.pr.clean::after {
+  content: "READY";
 }
 .pr.behind {
-  border-color: #5a7fa9cc;
+  border-color: #949699;
+}
+.pr.behind::after {
+  font-size: 14px;
+  line-height: 14px;
+  content: "BEHIND";
+}
+.pr.dirty {
+  border-color: #FF5613;
+}
+.pr.dirty::after {
+  color: #FFFFFF;
+  font-size: 11px;
+  line-height: 11px;
+  content: "CONFLICT";
+}
+.pr.blocked {
+  border-color: #00bd00;
+}
+.pr.blocked::after {
+  top: 10px;
+  font-size: 15px;
+  line-height: 15px;
+  content: "READY";
 }
 .pr a {
   text-decoration: none;
@@ -33,6 +64,16 @@
 }
 .pr .comments a:hover {
   text-decoration: none;
+}
+
+.fail {
+  color: #ff1a1a;
+}
+.success {
+  color: #00bd00;
+}
+.pending {
+  color: #7582a3;
 }
 
 .title {
