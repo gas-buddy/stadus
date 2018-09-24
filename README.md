@@ -6,10 +6,11 @@
     1. Give it a description, like "Stadus Token"
     1. Check off the top-level `repo` permission
     1. Click `Generate token` and copy the token
-2. Populate `.env.local` with the following values:
+1. Create a `.env.local` file
+1. Populate `.env.local` with the following values:
 ```
 REACT_APP_GITHUB_API_TOKEN={token}
-REACT_APP_GITHUB_BASE_URL={your github baseurl - optional - defaults to https://api.github.com}
+REACT_APP_GITHUB_BASE_URL={your github baseurl - optional, eg: https://api.github.com}
 ```
 
 ## Running the project
