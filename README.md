@@ -1,4 +1,4 @@
-![](https://i.imgur.com/O41Yo0x.png)
+![](https://i.imgur.com/0MnJOav.jpg)
 
 # Setup
 1. Create a GitHub [Personal Access Token](https://github.com/settings/tokens)
