@@ -38,6 +38,9 @@ export class PullRequest extends Component<Props> {
           github.getCommitStatuses(this.state.owner, this.state.repo, pr.head.sha),
           github.getPullRequestComments(this.state.owner, this.state.repo, this.state.number, pr.created_at),
         ]).then(([statuses, comments]) => {
+          if (!statuses.length) {
+            statuses.push({ state: 'success' });
+          }
           this.setState({ ...this.state, pr, statuses, comments });
         });
       });
