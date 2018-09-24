@@ -1,14 +1,22 @@
 // @flow
 import _ from 'lodash';
 import octokit from '@octokit/rest';
-import configStore from './config-store';
 
-const githubClient = octokit();
+const octokitOpts = {};
+
+
+const githubBaseUrl = process.env.REACT_APP_GITHUB_BASE_URL;
+if (githubBaseUrl) {
+  octokitOpts.baseUrl = githubBaseUrl;
+}
+
+const githubClient = octokit(octokitOpts);
 
 function authenticate() {
+  const apiToken = process.env.REACT_APP_GITHUB_API_TOKEN;
   githubClient.authenticate({
     type: 'token',
-    token: configStore.githubApiKey,
+    token: apiToken,
   });
 }
 

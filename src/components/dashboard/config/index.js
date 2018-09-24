@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react';
 import FontAwesome from 'react-fontawesome';
-import configStore from '../../../utils/config-store';
 import store from 'store';
 import Style from './style.css';
 
@@ -14,7 +13,6 @@ export default class Config extends Component<Props> {
   state: { opened: boolean, config: Object };
   props: { onChange: (Object) => void };
   defaultConfig = {
-    githubApiKey: '',
     owner: '',
     repos: '',
   }
@@ -26,7 +24,6 @@ export default class Config extends Component<Props> {
     this.configClicked = this.configClicked.bind(this);
 
     const config = store.get('config') || this.defaultConfig;
-    configStore.githubApiKey = config.githubApiKey;
 
     this.state = { opened: false, config };
     this.props.onChange(this.state.config);
@@ -47,7 +44,6 @@ export default class Config extends Component<Props> {
     this.setState((prevState) => {
       prevState.config[target.name] = target.value;
 
-      configStore.githubApiKey = prevState.config.githubApiKey;
       store.set('config', prevState.config);
       return prevState;
     });
